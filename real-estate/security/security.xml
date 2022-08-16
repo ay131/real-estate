@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--User Groups, Access Rights and Security Mechanism in Detail-->
+    <!--    category real estate -->
+    <record model="ir.module.category" id="module_category_real_estate">
+        <field name="name">real state</field>
+        <field name="description">Category For real estate</field>
+    </record>
+    <!--real estate  manager group -->
+<!--    <record id="estate_group_manager" model="res.groups">-->
+<!--        <field name="name">estate properties Manager</field>-->
+<!--        <field name="category_id" ref="module_category_real_estate"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('estate_group_manager'))]"/>-->
+<!--    </record>-->
+    <!--real estate user group [sales person ]-->
+    <record id="estate_group_user" model="res.groups">
+        <field name="name">estate properties user</field>
+        <field name="category_id" ref="module_category_real_estate"/>
+        <field name="implied_ids" eval="[(4, ref('estate_group_user'))]"/>
+    </record>
+    <!--real estate customer or agent -->
+<!--    <record id="estate_group_agent" model="res.groups">-->
+<!--        <field name="name">estate properties agent</field>-->
+<!--        <field name="category_id" ref="module_category_real_estate"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('estate_group_agent'))]"/>-->
+
+<!--    </record>-->
+
+
+    <record id="ir_rule_user_read_tags" model="ir.rule">
+        <field name="name">user read only tags</field>
+        <field name="model_id" ref="model_estate_property_tags"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('estate_group_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="ir_rule_user_read_type" model="ir.rule">
+        <field name="name">user raed only types</field>
+        <field name="model_id" ref="model_estate_property_type"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('estate_group_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+
+</odoo>
